@@ -6,8 +6,7 @@ repository: https://github.com/tmura-ido/drawable
 issue_tracker: https://github.com/tmura-ido/drawable/issues
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
-  flutter: '>=1.26.0-17.5.pre'
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
