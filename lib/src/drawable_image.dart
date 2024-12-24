@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui' as ui show Codec;
 
 import 'package:drawable/drawable.dart';
@@ -29,7 +30,8 @@ class DrawableImage extends ImageProvider<DrawableImage> {
   }
 
   @override
-  ImageStreamCompleter load(DrawableImage key, ImageDecoderCallback decode) {
+  ImageStreamCompleter loadImage(
+      DrawableImage key, ImageDecoderCallback decode) {
     return MultiFrameImageStreamCompleter(
       codec: _loadAsync(key, decode),
       scale: key.scale,
@@ -44,7 +46,11 @@ class DrawableImage extends ImageProvider<DrawableImage> {
       DrawableImage key, ImageDecoderCallback decode) async {
     assert(key == this);
 
-    final drawable = await androidDrawable.loadBitmap(name: name);
+    BitmapDrawable? drawable;
+
+    if (Platform.isAndroid) {
+      drawable = await androidDrawable.loadBitmap(name: name);
+    } else if (Platform.isIOS) {}
     if (drawable == null) {
       throw StateError(
         '$name does not exist and cannot be loaded as an image.',
@@ -64,7 +70,11 @@ class DrawableImage extends ImageProvider<DrawableImage> {
   }
 
   @override
-  int get hashCode => hashValues(name, scale);
+  int get hashCode =>
+      super.hashCode +
+      androidDrawable.hashCode +
+      name.hashCode +
+      scale.hashCode;
 
   @override
   String toString() =>

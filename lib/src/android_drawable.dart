@@ -1,12 +1,8 @@
-import 'dart:typed_data';
-import 'dart:ui';
-
+import 'package:drawable/src/drawable_type.dart';
 import 'package:drawable/src/drawables/adaptive_icon_drawable.dart';
 import 'package:drawable/src/drawables/bitmap_drawable.dart';
 import 'package:drawable/src/drawables/color_drawable.dart';
-import 'package:drawable/src/drawable_type.dart';
 import 'package:drawable/src/drawables/vector_drawable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 const _id = 'id';
@@ -27,7 +23,7 @@ class AndroidDrawable {
   }) async {
     final bitmapData = await _channel.invokeMethod<Uint8List>('bitmap', {
       _id: name,
-      _type: describeEnum(type),
+      _type: type.name,
     });
     if (bitmapData == null) {
       return null;
@@ -42,7 +38,7 @@ class AndroidDrawable {
   }) async {
     final data = await _channel.invokeMethod<Uint8List>('vector', {
       _id: name,
-      _type: describeEnum(type),
+      _type: type.name,
       _scale: scale,
     });
     if (data == null) {
@@ -71,7 +67,7 @@ class AndroidDrawable {
     final data =
         await _channel.invokeMethod<Map<dynamic, dynamic>>('adaptiveIcon', {
       _id: name,
-      _type: describeEnum(type),
+      _type: type.name,
       _scale: scale,
     });
     if (data == null) {
