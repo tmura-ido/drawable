@@ -1,6 +1,6 @@
 name: drawable
 description: Flutter plugin to load Android drawables. This helps to share graphics between Flutter and Android
-version: 0.1.2
+version: 0.1.3
 homepage: https://github.com/tmura-ido/drawable
 repository: https://github.com/tmura-ido/drawable
 issue_tracker: https://github.com/tmura-ido/drawable/issues
@@ -15,7 +15,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic: ^1.10.0
 
 flutter:
   plugin:

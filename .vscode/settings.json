@@ -1,3 +1,6 @@
 {
     "dart.flutterSdkPath": "D:/flutter/flutter3.24.4",
+    // "terminal.integrated.env.windows": {
+    //     "PATH": "C:/Program Files/Java/jdk-21;${env:PATH};"
+    // }
 }

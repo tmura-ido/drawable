@@ -1,15 +1,21 @@
+// plugins {
+//     id "com.android.application"
+//     id "org.jetbrains.kotlin.android"
+//     id "dev.flutter.flutter-gradle-plugin"
+// }
+
 group 'de.ju.drawable'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.8.0'
+    ext.kotlin_version = '2.1.0'
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:8.7.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -26,15 +32,23 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 35
+    namespace 'de.ju.drawable'
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 26
     }
-}
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21 // java version
+        targetCompatibility JavaVersion.VERSION_21 // java version
+    }
+    kotlinOptions {
+        jvmTarget = 21 // java version
+    }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    }
 }
