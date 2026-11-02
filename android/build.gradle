@@ -1,17 +1,11 @@
-// plugins {
-//     id "com.android.application"
-//     id "org.jetbrains.kotlin.android"
-//     id "dev.flutter.flutter-gradle-plugin"
-// }
-
-group 'de.ju.drawable'
-version '1.0-SNAPSHOT'
+group = 'de.ju.drawable'
+version = '1.0-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '2.1.0'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -23,32 +17,38 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+
+// Do NOT apply the Kotlin Gradle Plugin here. Flutter's tooling (3.44+) scans this
+// file and applies Kotlin itself when no KGP reference is present (built-in Kotlin
+// migration, see https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin).
 
 android {
-    compileSdkVersion 35
-    namespace 'de.ju.drawable'
+    compileSdk = 35
+    namespace = 'de.ju.drawable'
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 26
+        minSdk = 26
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_21 // java version
         targetCompatibility JavaVersion.VERSION_21 // java version
     }
-    kotlinOptions {
-        jvmTarget = 21 // java version
-    }
+}
 
-    dependencies {
-        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
     }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
